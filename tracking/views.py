@@ -4,36 +4,48 @@ from bs4 import BeautifulSoup
 
 # Create your views here.
 def index(request):
-    carriers = [
-        'ilyanglogis',
-        'epost',
-        'cjkorex',
-        'hanjin',
-        'ilogen',
-        'ems',
-        'chunil',
-        'kunyoung',
-        'fedexkr',
-        'ds3211',
-        'kdexp'
-    ]
+    carriers = {
+        'ilyanglogis': 't1',
+        'epost': 't2',
+        'cjkorex': 't3',
+        'hanjin': 'ha',
+        'ilogen': 'iln',
+        'ems': 'ms',
+        'chunil': 'cnil',
+        'kunyoung': 'young',
+        'fedexkr': 'exkr',
+        'ds3211': '211',
+        'kdexp': 'exp'
+    }
+    
+    display_carriers = list(carriers.values())
     results = []
+    
     if request.method == 'POST':
         tracking_number = request.POST.get('tracking_number')
         list_tracking_number = tracking_number.split('\r\n')
-        carrier = request.POST.get('carrier')
-        for number in list_tracking_number:
-            tracking_url = f'https://track.shiptrack.co.kr/{carrier}/{number}'
-            response = requests.get(tracking_url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            status = soup.find('div',{'class':'parcel-heading'})
-            if status:
-                status = translate_status(status.text.strip())
-            else:
-                status = 'Không xác định'
-            results.append({'tracking_number':number,'status':status})
-        return render(request, 'index.html',{'results':results,'carriers':carriers})
-    return render(request, 'index.html',{'carriers':carriers})
+        selected_carrier_display = request.POST.get('carrier')
+        
+        # Get the actual carrier code based on the display value
+        carrier = next((key for key, value in carriers.items() if value == selected_carrier_display), None)
+        
+        if not carrier:
+            results.append({'tracking_number': '', 'status': 'Không xác định carrier'})
+        else:
+            for number in list_tracking_number:
+                tracking_url = f'https://track.shiptrack.co.kr/{carrier}/{number}'
+                response = requests.get(tracking_url)
+                soup = BeautifulSoup(response.text, 'html.parser')
+                status = soup.find('div', {'class': 'parcel-heading'})
+                if status:
+                    status = translate_status(status.text.strip())
+                else:
+                    status = 'Không xác định'
+                results.append({'tracking_number': number, 'status': status})
+        
+        return render(request, 'index.html', {'results': results, 'carriers': display_carriers})
+    
+    return render(request, 'index.html', {'carriers': display_carriers})
 
 def translate_status(status):
     if status == '수입신고':
