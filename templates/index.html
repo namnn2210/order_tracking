@@ -111,49 +111,50 @@
     </div>
 
     <script>
-        function showStatusList(status) {
-            var statusList = JSON.parse(document.getElementById('status_lists').textContent);
-            var codeBlock = '<ul>';
-            statusList[status].forEach(function (item) {
-                codeBlock += '<li>' + item + '<button class="copy-btn" onclick="copyToClipboard(\'' + item + '\')">Copy</button></li>';
-            });
-            codeBlock += '</ul>';
+    function showStatusList(status) {
+        var statusList = JSON.parse(document.getElementById(status + '_list').textContent);
+        var codeBlock = '<ul>';
+        statusList.forEach(function (item) {
+            codeBlock += '<li>' + item + '<button class="copy-btn" onclick="copyToClipboard(\'' + item + '\')">Copy</button></li>';
+        });
+        codeBlock += '</ul>';
 
-            Swal.fire({
-                title: status,
-                html: codeBlock,
-                showCloseButton: true,
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                footer: '<button class="btn btn-primary" onclick="downloadList(\'' + status + '\')">Tải xuống danh sách</button>'
-            });
-        }
+        Swal.fire({
+            title: status,
+            html: codeBlock,
+            showCloseButton: true,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            footer: '<button class="btn btn-primary" onclick="downloadList(\'' + status + '\')">Tải xuống danh sách</button>'
+        });
+    }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            Swal.fire({
-                title: 'Đã sao chép',
-                text: text + ' đã được sao chép vào clipboard.',
-                icon: 'success',
-                timer: 1500,
-                showConfirmButton: false
-            });
-        }
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text);
+        Swal.fire({
+            title: 'Đã sao chép',
+            text: text + ' đã được sao chép vào clipboard.',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+        });
+    }
 
-        function downloadList(status) {
-            var statusList = JSON.parse(document.getElementById('status_lists').textContent);
-            var textToSave = statusList[status].join('\n');
-            var blob = new Blob([textToSave], { type: 'text/plain' });
-            var url = URL.createObjectURL(blob);
+    function downloadList(status) {
+        var statusList = JSON.parse(document.getElementById(status + '_list').textContent);
+        var textToSave = statusList.join('\n');
+        var blob = new Blob([textToSave], { type: 'text/plain' });
+        var url = URL.createObjectURL(blob);
 
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = status + '_list.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-    </script>
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = status + '_list.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+</script>
+
 </body>
 </html>
