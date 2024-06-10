@@ -60,22 +60,24 @@
                 </tr>
             </thead>
             <tbody>
+                {% with status_count as sc %}
                 <tr>
                     <td>Đã thông quan</td>
-                    <td>{{ status_count["Đã thông quan"] }}</td>
+                    <td>{{ sc.Đã thông quan }}</td>
                 </tr>
                 <tr>
                     <td>Đang thông quan</td>
-                    <td>{{ status_count["Đang thông quan"] }}</td>
+                    <td>{{ sc.Đang thông quan }}</td>
                 </tr>
                 <tr>
                     <td>Đang vận chuyển</td>
-                    <td>{{ status_count["Đang vận chuyển"] }}</td>
+                    <td>{{ sc.Đang vận chuyển }}</td>
                 </tr>
                 <tr>
                     <td>Đã giao hàng</td>
-                    <td>{{ status_count["Đã giao hàng"] }}</td>
+                    <td>{{ sc.Đã giao hàng }}</td>
                 </tr>
+                {% endwith %}
             </tbody>
         </table>
         
