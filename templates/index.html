@@ -23,6 +23,16 @@
 
         .logo {
             max-width: 100px;
+            
+        .status-quantity {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .status-quantity button {
+        margin-left: 5px; /* Khoảng cách giữa số lượng và nút "Xem" */
+    }
         }
     </style>
     <script>
@@ -57,7 +67,7 @@
             <button type="submit" class="btn btn-primary">Kiểm tra</button>
         </form>
 
-        <h1 class="text-center">Báo cáo kết quả</h1>
+        <h1 class="text-center">Báo cáo kết quả 111</h1>
 <table class="table mt-4 table-bordered">
     <thead>
         <tr>
@@ -86,6 +96,7 @@
         {% endwith %}
     </tbody>
 </table>
+
 
         <h1 class="text-center">Kết quả kiểm tra</h1>
         <table class="table mt-4 table-bordered">
