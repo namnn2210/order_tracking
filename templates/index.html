@@ -63,30 +63,25 @@
                 <tr>
                     <th scope="col">Trạng thái</th>
                     <th scope="col">Số lượng</th>
-                    <th scope="col">Xem</th>
                 </tr>
             </thead>
             <tbody>
                 {% with sc=status_count %}
                 <tr>
                     <td>Đã thông quan</td>
-                    <td>{{ sc.Đã_thông_quan }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
+                    <td>{{ sc.Đã_thông_quan }} <button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đang thông quan</td>
-                    <td>{{ sc.Đang_thông_quan }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button></td>
+                    <td>{{ sc.Đang_thông_quan }} <button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đang vận chuyển</td>
-                    <td>{{ sc.Đang_vận_chuyển }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button></td>
+                    <td>{{ sc.Đang_vận_chuyển }} <button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đã giao hàng</td>
-                    <td>{{ sc.Đã_giao_hàng }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
+                    <td>{{ sc.Đã_giao_hàng }} <button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
                 </tr>
                 {% endwith %}
             </tbody>
