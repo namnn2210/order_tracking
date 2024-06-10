@@ -25,6 +25,12 @@
             max-width: 100px;
         }
     </style>
+    <script>
+        function showStatusList(status) {
+            var statusList = JSON.parse(document.getElementById(status + '_list').textContent);
+            alert(statusList.join('\n'));
+        }
+    </script>
 </head>
 
 <body>
@@ -50,13 +56,14 @@
             </div>
             <button type="submit" class="btn btn-primary">Kiểm tra</button>
         </form>
-        
+
         <h1 class="text-center">Báo cáo kết quả</h1>
         <table class="table mt-4 table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Trạng thái</th>
                     <th scope="col">Số lượng</th>
+                    <th scope="col">Xem</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,23 +71,27 @@
                 <tr>
                     <td>Đã thông quan</td>
                     <td>{{ sc.Đã_thông_quan }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đang thông quan</td>
                     <td>{{ sc.Đang_thông_quan }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đang vận chuyển</td>
                     <td>{{ sc.Đang_vận_chuyển }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đã giao hàng</td>
                     <td>{{ sc.Đã_giao_hàng }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
                 </tr>
                 {% endwith %}
             </tbody>
         </table>
-        
+
         <h1 class="text-center">Kết quả kiểm tra</h1>
         <table class="table mt-4 table-bordered">
             <thead>
@@ -108,9 +119,26 @@
     <div class="footer text-center">
         <p>&copy; 2021 My Website. All rights reserved.</p>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Pass status lists from Django to JavaScript
+        document.addEventListener("DOMContentLoaded", function () {
+            var statusLists = {
+                'Đã_thông_quan': {{ status_lists.Đã_thông_quan|safe }},
+                'Đang_thông_quan': {{ status_lists.Đang_thông_quan|safe }},
+                'Đang_vận_chuyển': {{ status_lists.Đang_vận_chuyển|safe }},
+                'Đã_giao_hàng': {{ status_lists.Đã_giao_hàng|safe }}
+            };
+
+            for (var status in statusLists) {
+                var statusListElement = document.createElement('script');
+                statusListElement.type = 'application/json';
+                statusListElement.id = status + '_list';
+                statusListElement.textContent = JSON.stringify(statusLists[status]);
+                document.body.appendChild(statusListElement);
+            }
+        });
+    </script>
 </body>
 
 </html>
