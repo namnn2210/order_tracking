@@ -4,7 +4,6 @@
 <head>
     <title>Tracking tuan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         .header {
             background-color: #3498db;
@@ -25,27 +24,13 @@
         .logo {
             max-width: 100px;
         }
-
-        .status-list-dialog {
-            width: 60%;
-            max-width: 600px;
-            text-align: left;
-        }
-
-        .copy-btn {
-            margin-left: 10px;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .copy-btn:hover {
-            background-color: #0056b3;
-        }
     </style>
+    <script>
+        function showStatusList(status) {
+            var statusList = JSON.parse(document.getElementById(status + '_list').textContent);
+            alert(statusList.join('\n'));
+        }
+    </script>
 </head>
 
 <body>
@@ -134,38 +119,25 @@
     <div class="footer text-center">
         <p>&copy; 2021 My Website. All rights reserved.</p>
     </div>
+
     <script>
-        function showStatusList(status) {
-            var statusList = JSON.parse(document.getElementById(status + '_list').textContent);
-            var codeBlock = '<ul>';
-            statusList.forEach(function (item) {
-                codeBlock += '<li>' + item + '<button class="copy-btn" onclick="copyToClipboard(\'' + item + '\')">Copy</button></li>';
-            });
-            codeBlock += '</ul>';
+        // Pass status lists from Django to JavaScript
+        document.addEventListener("DOMContentLoaded", function () {
+            var statusLists = {
+                'Đã_thông_quan': {{ status_lists.Đã_thông_quan|safe }},
+                'Đang_thông_quan': {{ status_lists.Đang_thông_quan|safe }},
+                'Đang_vận_chuyển': {{ status_lists.Đang_vận_chuyển|safe }},
+                'Đã_giao_hàng': {{ status_lists.Đã_giao_hàng|safe }}
+            };
 
-            Swal.fire({
-                title: status,
-                html: codeBlock,
-                position: 'center',
-                showCloseButton: true,
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                customClass: {
-                    container: 'status-list-dialog'
-                }
-            });
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            Swal.fire({
-                title: 'Đã sao chép',
-                text: text + ' đã được sao chép vào clipboard.',
-                icon: 'success',
-                timer: 1500,
-                showConfirmButton: false
-            });
-        }
+            for (var status in statusLists) {
+                var statusListElement = document.createElement('script');
+                statusListElement.type = 'application/json';
+                statusListElement.id = status + '_list';
+                statusListElement.textContent = JSON.stringify(statusLists[status]);
+                document.body.appendChild(statusListElement);
+            }
+        });
     </script>
 </body>
 
