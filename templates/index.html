@@ -62,31 +62,31 @@
             <thead>
                 <tr>
                     <th scope="col">Trạng thái</th>
-                    <th scope="col">Xem</th>
                     <th scope="col">Số lượng</th>
+                    <th scope="col">Xem</th>
                 </tr>
             </thead>
             <tbody>
                 {% with sc=status_count %}
                 <tr>
                     <td>Đã thông quan</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
-                    <td>{{ sc.Đã_thông_quan }}</td>
+                    <td>{{ sc.Đã thông quan }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã thông quan')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đang thông quan</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button></td>
-                    <td>{{ sc.Đang_thông_quan }}</td>
+                    <td>{{ sc.Đang thông quan }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang thông quan')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đang vận chuyển</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button></td>
-                    <td>{{ sc.Đang_vận_chuyển }}</td>
+                    <td>{{ sc.Đang vận chuyển }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang vận chuyển')">Xem</button></td>
                 </tr>
                 <tr>
                     <td>Đã giao hàng</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
-                    <td>{{ sc.Đã_giao_hàng }}</td>
+                    <td>{{ sc.Đã giao hàng }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã giao hàng')">Xem</button></td>
                 </tr>
                 {% endwith %}
             </tbody>
@@ -124,10 +124,10 @@
         // Pass status lists from Django to JavaScript
         document.addEventListener("DOMContentLoaded", function () {
             var statusLists = {
-                'Đã_thông_quan': {{ status_lists.Đã_thông_quan|safe }},
-                'Đang_thông_quan': {{ status_lists.Đang_thông_quan|safe }},
-                'Đang_vận_chuyển': {{ status_lists.Đang_vận_chuyển|safe }},
-                'Đã_giao_hàng': {{ status_lists.Đã_giao_hàng|safe }}
+                'Đã thông quan': {{ status_lists.Đã thông quan|safe }},
+                'Đang thông quan': {{ status_lists.Đang thông quan|safe }},
+                'Đang vận chuyển': {{ status_lists.Đang vận chuyển|safe }},
+                'Đã giao hàng': {{ status_lists.Đã giao hàng|safe }}
             };
 
             for (var status in statusLists) {
