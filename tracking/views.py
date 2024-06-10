@@ -1,21 +1,21 @@
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
-import json
 
+# Create your views here.
 def index(request):
     carriers = {
-        'cjkorex': 'CJ 대한통운',
-        'hanjin': '한진택배',
-        'ilogen': '로젠택배',
-        'kdexp': '경동택배',
-        'fedexkr': 'FedEx',
-        'ilyanglogis': '일양로지스',
-        'epost': '우체국택배',
-        'ems': 'EMS',
-        'chunil': '천일택배',
-        'kunyoung': '건영택배',
-        'ds3211': '대신택배'       
+         'cjkorex': 'CJ 대한통운',
+         'hanjin': '한진택배',
+         'ilogen': '로젠택배',
+         'kdexp': '경동택배',
+         'fedexkr': 'FedEx',
+         'ilyanglogis': '일양로지스',
+         'epost': '우체국택배',
+         'ems': 'EMS',
+         'chunil': '천일택배',
+         'kunyoung': '건영택배',
+         'ds3211': '대신택배'       
     }
     
     display_carriers = list(carriers.values())
@@ -73,13 +73,13 @@ def index(request):
             'results': results,
             'carriers': display_carriers,
             'status_count': status_count,
-            'status_lists': json.dumps(status_lists),
+            'status_lists': status_lists,
         })
     
     return render(request, 'index.html', {
         'carriers': display_carriers,
         'status_count': status_count,
-        'status_lists': json.dumps(status_lists),
+        'status_lists': status_lists,
     })
 
 def translate_status(status):
