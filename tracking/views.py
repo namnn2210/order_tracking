@@ -5,16 +5,16 @@ from bs4 import BeautifulSoup
 # Create your views here.
 def index(request):
     carriers = [
-        'ilyanglogis': 't1',
-        'epost': 't2',
-        'cjkorex': 't3',
-        'hanjin': 'ha',
-        'ilogen': 'iln',
-        'ems': 'ms',
-        'chunil': 'cnil',
-        'kunyoung': 'young',
-        'fedexkr': 'exkr',
-        'ds3211': '211',
+        'ilyanglogis': 't1';
+        'epost': 't2';
+        'cjkorex': 't3';
+        'hanjin': 'ha';
+        'ilogen': 'iln';
+        'ems': 'ms';
+        'chunil': 'cnil';
+        'kunyoung': 'young';
+        'fedexkr': 'exkr';
+        'ds3211': '211';
         'kdexp': 'exp'
     ]
     results = []
