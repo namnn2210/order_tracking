@@ -44,7 +44,7 @@
                 <label>Lựa chọn đơn vị vận chuyển</label>
                 <select class="form-control" id="dropdown" name="carrier">
                     {% for carrier in carriers %}
-                    <option value="{{carrier}}">{{carrier}}</option>
+                    <option value="{{ carrier }}">{{ carrier }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -60,22 +60,22 @@
                 </tr>
             </thead>
             <tbody>
-                {% with da_thong_quan=status_count.Đã_thông_quan dang_thong_quan=status_count.Đang_thông_quan dang_van_chuyen=status_count.Đang_vận_chuyển da_giao_hang=status_count.Đã_giao_hàng %}
+                {% with sc=status_count %}
                 <tr>
                     <td>Đã thông quan</td>
-                    <td>{{ da_thong_quan }}</td>
+                    <td>{{ sc.Đã_thông_quan }}</td>
                 </tr>
                 <tr>
                     <td>Đang thông quan</td>
-                    <td>{{ dang_thong_quan }}</td>
+                    <td>{{ sc.Đang_thông_quan }}</td>
                 </tr>
                 <tr>
                     <td>Đang vận chuyển</td>
-                    <td>{{ dang_van_chuyen }}</td>
+                    <td>{{ sc.Đang_vận_chuyển }}</td>
                 </tr>
                 <tr>
                     <td>Đã giao hàng</td>
-                    <td>{{ da_giao_hang }}</td>
+                    <td>{{ sc.Đã_giao_hàng }}</td>
                 </tr>
                 {% endwith %}
             </tbody>
