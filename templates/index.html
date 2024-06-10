@@ -17,10 +17,8 @@
             color: #fff;
             padding: 10px;
             text-align: center;
-
             bottom: 0;
             width: 100%;
-
         }
 
         .logo {
@@ -47,12 +45,40 @@
                 <select class="form-control" id="dropdown" name="carrier">
                     {% for carrier in carriers %}
                     <option value="{{carrier}}">{{carrier}}</option>
-                    <!-- Add more options here -->
                     {% endfor %}
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Kiểm tra</button>
         </form>
+        
+        <h1 class="text-center">Báo cáo kết quả</h1>
+        <table class="table mt-4 table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Đã thông quan</td>
+                    <td>{{ status_count["Đã thông quan"] }}</td>
+                </tr>
+                <tr>
+                    <td>Đang thông quan</td>
+                    <td>{{ status_count["Đang thông quan"] }}</td>
+                </tr>
+                <tr>
+                    <td>Đang vận chuyển</td>
+                    <td>{{ status_count["Đang vận chuyển"] }}</td>
+                </tr>
+                <tr>
+                    <td>Đã giao hàng</td>
+                    <td>{{ status_count["Đã giao hàng"] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
         <h1 class="text-center">Kết quả kiểm tra</h1>
         <table class="table mt-4 table-bordered">
             <thead>
@@ -71,7 +97,7 @@
                 {% endfor %}
                 {% else %}
                 <tr>
-                    <td colspan="2">Không có đơn hàng</td>
+                    <td colspan="2">Không có đơn hàng</td>
                 </tr>
                 {% endif %}
             </tbody>
