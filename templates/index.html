@@ -57,7 +57,7 @@
             <button type="submit" class="btn btn-primary">Kiểm tra</button>
         </form>
 
-        <h1 class="text-center">Báo cáo kết quaaaả</h1>
+        <h1 class="text-center">Báo cáo kết quả</h1>
 <table class="table mt-4 table-bordered">
     <thead>
         <tr>
@@ -69,19 +69,19 @@
         {% with sc=status_count %}
         <tr>
             <td>Đã thông quan</td>
-            <td style="text-align: center;">{{ sc.Đã_thông_quan }}{% if sc.Đã_thông_quan != 0 %} <button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button>{% endif %}</td>
+            <td class="status-quantity">{% if sc.Đã_thông_quan != 0 %}{{ sc.Đã_thông_quan }}<button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button>{% else %}0{% endif %}</td>
         </tr>
         <tr>
             <td>Đang thông quan</td>
-            <td style="text-align: center;">{{ sc.Đang_thông_quan }}{% if sc.Đang_thông_quan != 0 %} <button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button>{% endif %}</td>
+            <td class="status-quantity">{% if sc.Đang_thông_quan != 0 %}{{ sc.Đang_thông_quan }}<button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button>{% else %}0{% endif %}</td>
         </tr>
         <tr>
             <td>Đang vận chuyển</td>
-            <td style="text-align: center;">{{ sc.Đang_vận_chuyển }}{% if sc.Đang_vận_chuyển != 0 %} <button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button>{% endif %}</td>
+            <td class="status-quantity">{% if sc.Đang_vận_chuyển != 0 %}{{ sc.Đang_vận_chuyển }}<button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button>{% else %}0{% endif %}</td>
         </tr>
         <tr>
             <td>Đã giao hàng</td>
-            <td style="text-align: center;">{{ sc.Đã_giao_hàng }}{% if sc.Đã_giao_hàng != 0 %} <button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button>{% endif %}</td>
+            <td class="status-quantity">{% if sc.Đã_giao_hàng != 0 %}{{ sc.Đã_giao_hàng }}<button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button>{% else %}0{% endif %}</td>
         </tr>
         {% endwith %}
     </tbody>
