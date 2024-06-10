@@ -21,16 +21,16 @@ def index(request):
     display_carriers = list(carriers.values())
     results = []
     status_count = {
-        'Đã_thông_quan': 0,
-        'Đang_thông_quan': 0,
-        'Đang_vận_chuyển': 0,
-        'Đã_giao_hàng': 0,
+        'Đã thông quan': 0,
+        'Đang thông quan': 0,
+        'Đang vận chuyển': 0,
+        'Đã giao hàng': 0,
     }
     status_lists = {
-        'Đã_thông_quan': [],
-        'Đang_thông_quan': [],
-        'Đang_vận_chuyển': [],
-        'Đã_giao_hàng': [],
+        'Đã thông quan': [],
+        'Đang thông quan': [],
+        'Đang vận chuyển': [],
+        'Đã giao hàng': [],
     }
     
     if request.method == 'POST':
@@ -38,7 +38,6 @@ def index(request):
         list_tracking_number = tracking_number.split('\r\n')
         selected_carrier_display = request.POST.get('carrier')
         
-        # Get the actual carrier code based on the display value
         carrier = next((key for key, value in carriers.items() if value == selected_carrier_display), None)
         
         if not carrier:
@@ -55,19 +54,9 @@ def index(request):
                     status_text = 'Không xác định'
                 results.append({'tracking_number': number, 'status': status_text})
                 
-                # Increment status count and add to status list
-                if status_text == 'Đã thông quan':
-                    status_count['Đã_thông_quan'] += 1
-                    status_lists['Đã_thông_quan'].append(number)
-                elif status_text == 'Đang thông quan':
-                    status_count['Đang_thông_quan'] += 1
-                    status_lists['Đang_thông_quan'].append(number)
-                elif status_text == 'Đang vận chuyển':
-                    status_count['Đang_vận_chuyển'] += 1
-                    status_lists['Đang_vận_chuyển'].append(number)
-                elif status_text == 'Đã giao hàng':
-                    status_count['Đã_giao_hàng'] += 1
-                    status_lists['Đã_giao_hàng'].append(number)
+                if status_text in status_count:
+                    status_count[status_text] += 1
+                    status_lists[status_text].append(number)
         
         return render(request, 'index.html', {
             'results': results,
@@ -81,6 +70,7 @@ def index(request):
         'status_count': status_count,
         'status_lists': status_lists,
     })
+
 
 def translate_status(status):
     if status == '수입신고':
