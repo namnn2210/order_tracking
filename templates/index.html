@@ -69,25 +69,26 @@
             <tbody>
                 {% with sc=status_count %}
                 <tr>
-                    <td>Đã thông quan</td>
-                    <td>{{ sc.Đã thông quan }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã thông quan')">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>Đang thông quan</td>
-                    <td>{{ sc.Đang thông quan }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang thông quan')">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>Đang vận chuyển</td>
-                    <td>{{ sc.Đang vận chuyển }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang vận chuyển')">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>Đã giao hàng</td>
-                    <td>{{ sc.Đã giao hàng }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã giao hàng')">Xem</button></td>
-                </tr>
+    <td>Đã thông quan</td>
+    <td>{{ sc.Đã_thông_quan }}</td>
+    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã thông quan')">Xem</button></td>
+</tr>
+<tr>
+    <td>Đang thông quan</td>
+    <td>{{ sc.Đang_thông_quan }}</td>
+    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang thông quan')">Xem</button></td>
+</tr>
+<tr>
+    <td>Đang vận chuyển</td>
+    <td>{{ sc.Đang_vận_chuyển }}</td>
+    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang vận chuyển')">Xem</button></td>
+</tr>
+<tr>
+    <td>Đã giao hàng</td>
+    <td>{{ sc.Đã_giao_hàng }}</td>
+    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã giao hàng')">Xem</button></td>
+</tr>
+
                 {% endwith %}
             </tbody>
         </table>
