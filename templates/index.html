@@ -67,7 +67,7 @@
             </thead>
             <tbody>
                 {% with sc=status_count %}
-                <tr>
+               <center><tr>
                     <td>Đã thông quan</td>
                     <td>{{ sc.Đã_thông_quan }} <button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
                 </tr>
@@ -82,7 +82,7 @@
                 <tr>
                     <td>Đã giao hàng</td>
                     <td>{{ sc.Đã_giao_hàng }} <button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
-                </tr>
+                </tr></center>
                 {% endwith %}
             </tbody>
         </table>
