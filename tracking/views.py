@@ -21,10 +21,10 @@ def index(request):
     display_carriers = list(carriers.values())
     results = []
     status_count = {
-        'Đã thông quan': 0,
-        'Đang thông quan': 0,
-        'Đang vận chuyển': 0,
-        'Đã giao hàng': 0,
+        'Đã_thông_quan': 0,
+        'Đang_thông_quan': 0,
+        'Đang_vận_chuyển': 0,
+        'Đã_giao_hàng': 0,
     }
     
     if request.method == 'POST':
@@ -50,8 +50,14 @@ def index(request):
                 results.append({'tracking_number': number, 'status': status_text})
                 
                 # Increment status count
-                if status_text in status_count:
-                    status_count[status_text] += 1
+                if status_text == 'Đã thông quan':
+                    status_count['Đã_thông_quan'] += 1
+                elif status_text == 'Đang thông quan':
+                    status_count['Đang_thông_quan'] += 1
+                elif status_text == 'Đang vận chuyển':
+                    status_count['Đang_vận_chuyển'] += 1
+                elif status_text == 'Đã giao hàng':
+                    status_count['Đã_giao_hàng'] += 1
         
         return render(request, 'index.html', {'results': results, 'carriers': display_carriers, 'status_count': status_count})
     
