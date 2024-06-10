@@ -5,17 +5,17 @@ from bs4 import BeautifulSoup
 # Create your views here.
 def index(request):
     carriers = {
-        'ilyanglogis': 't1',
-        'epost': 't2',
-        'cjkorex': 't3',
-        'hanjin': 'ha',
-        'ilogen': 'iln',
-        'ems': 'ms',
-        'chunil': 'cnil',
-        'kunyoung': 'young',
-        'fedexkr': 'exkr',
-        'ds3211': '211',
-        'kdexp': 'exp'
+         'cjkorex': 'CJ 대한통운',
+         'hanjin': '한진택배',
+         'ilogen': '로젠택배',
+         'kdexp': '경동택배',
+         'fedexkr': 'FedEx',
+         'ilyanglogis': '일양로지스',
+         'epost': '우체국택배',
+         'ems': 'EMS',
+         'chunil': '천일택배',
+         'kunyoung': '건영택배',
+         'ds3211': '대신택배'       
     }
     
     display_carriers = list(carriers.values())
