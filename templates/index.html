@@ -58,39 +58,25 @@
         </form>
 
         <h1 class="text-center">Báo cáo kết quả</h1>
-        <table class="table mt-4 table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Trạng thái</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Xem</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% with sc=status_count %}
-                <tr>
-                    <td>Đã thông quan</td>
-                    <td>{{ sc.Đã_thông_quan }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>Đang thông quan</td>
-                    <td>{{ sc.Đang_thông_quan }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>Đang vận chuyển</td>
-                    <td>{{ sc.Đang_vận_chuyển }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>Đã giao hàng</td>
-                    <td>{{ sc.Đã_giao_hàng }}</td>
-                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
-                </tr>
-                {% endwith %}
-            </tbody>
-        </table>
+<table class="table mt-4 table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Xem</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for status, count in status_count.items %}
+        <tr>
+            <td>{{ status }}</td>
+            <td>{{ count }}</td>
+            <td><button type="button" class="btn btn-link" onclick="showStatusList('{{ status }}')">Xem</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 
         <h1 class="text-center">Kết quả kiểm tra</h1>
         <table class="table mt-4 table-bordered">
