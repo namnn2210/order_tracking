@@ -20,6 +20,12 @@ def index(request):
     
     display_carriers = list(carriers.values())
     results = []
+    status_count = {
+        'Đã thông quan': 0,
+        'Đang thông quan': 0,
+        'Đang vận chuyển': 0,
+        'Đã giao hàng': 0,
+    }
     
     if request.method == 'POST':
         tracking_number = request.POST.get('tracking_number')
@@ -38,14 +44,18 @@ def index(request):
                 soup = BeautifulSoup(response.text, 'html.parser')
                 status = soup.find('div', {'class': 'parcel-heading'})
                 if status:
-                    status = translate_status(status.text.strip())
+                    status_text = translate_status(status.text.strip())
                 else:
-                    status = 'Không xác định'
-                results.append({'tracking_number': number, 'status': status})
+                    status_text = 'Không xác định'
+                results.append({'tracking_number': number, 'status': status_text})
+                
+                # Increment status count
+                if status_text in status_count:
+                    status_count[status_text] += 1
         
-        return render(request, 'index.html', {'results': results, 'carriers': display_carriers})
+        return render(request, 'index.html', {'results': results, 'carriers': display_carriers, 'status_count': status_count})
     
-    return render(request, 'index.html', {'carriers': display_carriers})
+    return render(request, 'index.html', {'carriers': display_carriers, 'status_count': status_count})
 
 def translate_status(status):
     if status == '수입신고':
