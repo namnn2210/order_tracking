@@ -60,22 +60,22 @@
                 </tr>
             </thead>
             <tbody>
-                {% with status_count as sc %}
+                {% with da_thong_quan=status_count.Đã_thông_quan dang_thong_quan=status_count.Đang_thông_quan dang_van_chuyen=status_count.Đang_vận_chuyển da_giao_hang=status_count.Đã_giao_hàng %}
                 <tr>
                     <td>Đã thông quan</td>
-                    <td>{{ sc.Đã thông quan }}</td>
+                    <td>{{ da_thong_quan }}</td>
                 </tr>
                 <tr>
                     <td>Đang thông quan</td>
-                    <td>{{ sc.Đang thông quan }}</td>
+                    <td>{{ dang_thong_quan }}</td>
                 </tr>
                 <tr>
                     <td>Đang vận chuyển</td>
-                    <td>{{ sc.Đang vận chuyển }}</td>
+                    <td>{{ dang_van_chuyen }}</td>
                 </tr>
                 <tr>
                     <td>Đã giao hàng</td>
-                    <td>{{ sc.Đã giao hàng }}</td>
+                    <td>{{ da_giao_hang }}</td>
                 </tr>
                 {% endwith %}
             </tbody>
