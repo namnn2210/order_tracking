@@ -7,7 +7,7 @@ def index(request):
     carriers = [
         'ilyanglogis',
         'epost',
-        'CJ대한통운',
+        'cjkorex',
         'hanjin',
         'ilogen',
         'ems',
