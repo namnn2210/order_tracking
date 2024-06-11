@@ -20,18 +20,6 @@ def index(request):
     
     display_carriers = list(carriers.values())
     results = []
-    status_count = {
-        'Đã_thông_quan': 0,
-        'Đang_thông_quan': 0,
-        'Đang_vận_chuyển': 0,
-        'Đã_giao_hàng': 0,
-    }
-    status_lists = {
-        'Đã_thông_quan': [],
-        'Đang_thông_quan': [],
-        'Đang_vận_chuyển': [],
-        'Đã_giao_hàng': [],
-    }
     
     if request.method == 'POST':
         tracking_number = request.POST.get('tracking_number')
@@ -50,37 +38,14 @@ def index(request):
                 soup = BeautifulSoup(response.text, 'html.parser')
                 status = soup.find('div', {'class': 'parcel-heading'})
                 if status:
-                    status_text = translate_status(status.text.strip())
+                    status = translate_status(status.text.strip())
                 else:
-                    status_text = 'Không xác định'
-                results.append({'tracking_number': number, 'status': status_text})
-                
-                # Increment status count and add to status list
-                if status_text == 'Đã thông quan':
-                    status_count['Đã_thông_quan'] += 1
-                    status_lists['Đã_thông_quan'].append(number)
-                elif status_text == 'Đang thông quan':
-                    status_count['Đang_thông_quan'] += 1
-                    status_lists['Đang_thông_quan'].append(number)
-                elif status_text == 'Đang vận chuyển':
-                    status_count['Đang_vận_chuyển'] += 1
-                    status_lists['Đang_vận_chuyển'].append(number)
-                elif status_text == 'Đã giao hàng':
-                    status_count['Đã_giao_hàng'] += 1
-                    status_lists['Đã_giao_hàng'].append(number)
+                    status = 'Không xác định'
+                results.append({'tracking_number': number, 'status': status})
         
-        return render(request, 'index.html', {
-            'results': results,
-            'carriers': display_carriers,
-            'status_count': status_count,
-            'status_lists': status_lists,
-        })
+        return render(request, 'index.html', {'results': results, 'carriers': display_carriers})
     
-    return render(request, 'index.html', {
-        'carriers': display_carriers,
-        'status_count': status_count,
-        'status_lists': status_lists,
-    })
+    return render(request, 'index.html', {'carriers': display_carriers})
 
 def translate_status(status):
     if status == '수입신고':
