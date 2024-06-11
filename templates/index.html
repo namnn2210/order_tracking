@@ -25,16 +25,6 @@
             max-width: 100px;
         }
     </style>
-    <style>
-    .status-quantity-wrapper {
-        text-align: right;
-        white-space: nowrap; /* Ngăn chặn quá trình trình duyệt tự động xuống dòng */
-    }
-    .status-quantity {
-        display: inline-block;
-        margin-right: 5px; /* Khoảng cách giữa số lượng và nút "Xem" */
-    }
-</style>
     <script>
         function showStatusList(status) {
             var statusList = JSON.parse(document.getElementById(status + '_list').textContent);
@@ -67,48 +57,40 @@
             <button type="submit" class="btn btn-primary">Kiểm tra</button>
         </form>
 
-       <h1 class="text-center">Báo cáo kết quả </h1>
-<table class="table mt-4 table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Số lượng</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% with sc=status_count %}
-        <tr>
-            <td>Đã thông quan</td>
-            <td class="status-quantity-wrapper">{% if sc.Đã_thông_quan != 0 %}<span class="status-quantity">{{ sc.Đã_thông_quan }}</span><button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button>{% else %}0{% endif %}</td>
-        </tr>
-        <tr>
-            <td>Đang thông quan</td>
-            <td class="status-quantity-wrapper">{% if sc.Đang_thông_quan != 0 %}<span class="status-quantity">{{ sc.Đang_thông_quan }}</span><button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button>{% else %}0{% endif %}</td>
-        </tr>
-        <tr>
-            <td>Đang vận chuyển</td>
-            <td class="status-quantity-wrapper">{% if sc.Đang_vận_chuyển != 0 %}<span class="status-quantity">{{ sc.Đang_vận_chuyển }}</span><button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button>{% else %}0{% endif %}</td>
-        </tr>
-        <tr>
-            <td>Đã giao hàng</td>
-            <td class="status-quantity-wrapper">{% if sc.Đã_giao_hàng != 0 %}<span class="status-quantity">{{ sc.Đã_giao_hàng }}</span><button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button>{% else %}0{% endif %}</td>
-        </tr>
-        {% endwith %}
-    </tbody>
-</table>
-
-<style>
-    .status-quantity-wrapper {
-        text-align: right;
-        white-space: nowrap; /* Ngăn chặn quá trình trình duyệt tự động xuống dòng */
-    }
-    .status-quantity {
-        display: inline-block;
-        margin-right: 5px; /* Khoảng cách giữa số lượng và nút "Xem" */
-    }
-</style>
-
-
+        <h1 class="text-center">Báo cáo kết quả dd</h1>
+        <table class="table mt-4 table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Xem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% with sc=status_count %}
+                <tr>
+                    <td>Đã thông quan</td>
+                    <td>{{ sc.Đã_thông_quan }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_thông_quan')">Xem</button></td>
+                </tr>
+                <tr>
+                    <td>Đang thông quan</td>
+                    <td>{{ sc.Đang_thông_quan }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_thông_quan')">Xem</button></td>
+                </tr>
+                <tr>
+                    <td>Đang vận chuyển</td>
+                    <td>{{ sc.Đang_vận_chuyển }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đang_vận_chuyển')">Xem</button></td>
+                </tr>
+                <tr>
+                    <td>Đã giao hàng</td>
+                    <td>{{ sc.Đã_giao_hàng }}</td>
+                    <td><button type="button" class="btn btn-link" onclick="showStatusList('Đã_giao_hàng')">Xem</button></td>
+                </tr>
+                {% endwith %}
+            </tbody>
+        </table>
 
         <h1 class="text-center">Kết quả kiểm tra</h1>
         <table class="table mt-4 table-bordered">
